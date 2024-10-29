@@ -75,13 +75,20 @@ const resgiterUser = async (req, res) => {
         console.log(error);
         res.json({success:false, message:error.message})
     }
-
+    
 }
 
 //router for admin login 
 const adminLogin = async (req, res) => {
-
+    
+    const {email, password} = req.body
+    
+    if (email === process.env.ADMIN_EMAIL && password === process.env.ADMIN_PASSWORD) {
+        const token = jwt.sign(email+password, process.env.JWT_SECRET);
+        res.json({success:true, token})
+    } else {
+        console.log(error);
+        res.json({success:false, message:"Invalid Credential"})
+    }
 }
-
-
 export {loginUser, resgiterUser, adminLogin}

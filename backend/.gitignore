@@ -1,2 +1,2 @@
-# env
+# Ignore all .env files
 .env
